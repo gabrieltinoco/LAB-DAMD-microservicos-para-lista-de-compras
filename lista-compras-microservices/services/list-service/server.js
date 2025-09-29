@@ -16,7 +16,7 @@ class ListService {
         this.port = 3002;
         this.serviceName = 'list-service';
         this.serviceUrl = `http://127.0.0.1:${this.port}`;
-        
+
         this.setupDatabase();
         this.setupMiddleware();
         this.setupRoutes();
@@ -33,8 +33,6 @@ class ListService {
         this.app.use(cors());
         this.app.use(morgan('combined'));
         this.app.use(express.json());
-        // Todas as rotas deste serviço exigirão autenticação
-        this.app.use(this.authMiddleware.bind(this));
     }
 
     async authMiddleware(req, res, next) {
@@ -61,7 +59,9 @@ class ListService {
 
     setupRoutes() {
         this.app.get('/health', (req, res) => res.json({ service: this.serviceName, status: 'healthy' }));
-        
+
+        this.app.use(this.authMiddleware.bind(this));
+
         // Rotas para Listas
         this.app.post('/lists', this.createList.bind(this));
         this.app.get('/lists', this.getUserLists.bind(this));
@@ -75,9 +75,9 @@ class ListService {
         this.app.put('/lists/:id/items/:itemId', this.updateItemInList.bind(this));
         this.app.delete('/lists/:id/items/:itemId', this.removeItemFromList.bind(this));
     }
-    
+
     // --- Lógica de Negócio Auxiliar ---
-    
+
     calculateSummary(items) {
         const totalItems = items.length;
         const purchasedItems = items.filter(item => item.purchased).length;
@@ -91,7 +91,7 @@ class ListService {
         try {
             const { name, description } = req.body;
             if (!name) return res.status(400).json({ success: false, message: 'O nome da lista é obrigatório' });
-            
+
             const newList = await this.listsDb.create({
                 id: uuidv4(),
                 userId: req.user.id,
@@ -118,11 +118,11 @@ class ListService {
         if (list.userId !== req.user.id) return res.status(403).json({ success: false, message: 'Acesso negado' });
         res.json({ success: true, data: list });
     }
-    
+
     async updateList(req, res) {
         const list = await this.listsDb.findById(req.params.id);
         if (!list || list.userId !== req.user.id) return res.status(404).json({ success: false, message: 'Lista não encontrada ou acesso negado' });
-        
+
         const { name, description, status } = req.body;
         const updatedList = await this.listsDb.update(req.params.id, { name, description, status });
         res.json({ success: true, data: updatedList });
@@ -131,7 +131,7 @@ class ListService {
     async deleteList(req, res) {
         const list = await this.listsDb.findById(req.params.id);
         if (!list || list.userId !== req.user.id) return res.status(404).json({ success: false, message: 'Lista não encontrada ou acesso negado' });
-        
+
         await this.listsDb.delete(req.params.id);
         res.status(204).send();
     }
@@ -154,9 +154,9 @@ class ListService {
             const itemService = serviceRegistry.discover('item-service');
             const itemResponse = await axios.get(`${itemService.url}/items/${itemId}`);
             const itemDetails = itemResponse.data.data;
-            
+
             if (!itemDetails) return res.status(404).json({ success: false, message: 'Item do catálogo não encontrado' });
-            
+
             const newItem = {
                 itemId: itemDetails.id,
                 itemName: itemDetails.name, // Cache do nome
@@ -184,7 +184,7 @@ class ListService {
 
         const itemIndex = list.items.findIndex(item => item.itemId === req.params.itemId);
         if (itemIndex === -1) return res.status(404).json({ success: false, message: 'Item não encontrado na lista' });
-        
+
         const { quantity, purchased, notes } = req.body;
         if (quantity !== undefined) list.items[itemIndex].quantity = parseFloat(quantity);
         if (purchased !== undefined) list.items[itemIndex].purchased = purchased;
@@ -202,7 +202,7 @@ class ListService {
 
         const initialLength = list.items.length;
         list.items = list.items.filter(item => item.itemId !== req.params.itemId);
-        
+
         if (list.items.length === initialLength) return res.status(404).json({ success: false, message: 'Item não encontrado na lista' });
 
         list.summary = this.calculateSummary(list.items);

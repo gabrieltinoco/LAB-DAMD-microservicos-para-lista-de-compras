@@ -1,23 +1,23 @@
 {
-  "user-service": {
-    "url": "http://127.0.0.1:3001",
-    "registeredAt": 1759176849801,
-    "lastHealthCheck": 1759176939805,
-    "healthy": true,
-    "pid": 52008
-  },
   "item-service": {
     "url": "http://127.0.0.1:3003",
     "registeredAt": 1759176859199,
-    "lastHealthCheck": 1759176931697,
+    "lastHealthCheck": 1759177892228,
     "healthy": true,
     "pid": 52123
   },
+  "user-service": {
+    "url": "http://127.0.0.1:3001",
+    "registeredAt": 1759177011868,
+    "lastHealthCheck": 1759177892232,
+    "healthy": true,
+    "pid": 54633
+  },
   "list-service": {
     "url": "http://127.0.0.1:3002",
-    "registeredAt": 1759176864709,
-    "lastHealthCheck": 1759176931703,
-    "healthy": false,
-    "pid": 52241
+    "registeredAt": 1759177803871,
+    "lastHealthCheck": 1759177893873,
+    "healthy": true,
+    "pid": 65310
   }
 }

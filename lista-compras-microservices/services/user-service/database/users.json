@@ -12,5 +12,33 @@
     },
     "createdAt": "2025-09-29T20:14:37.765Z",
     "updatedAt": "2025-09-29T20:14:37.765Z"
+  },
+  {
+    "id": "bfcfb553-70ec-486f-b3d5-fbcae9ce75a8",
+    "email": "testuser1759177028115@pucminas.br",
+    "username": "testuser1759177028115",
+    "password": "$2a$12$wwdHLRuHFzAwGWWcaxDgjefZx/89QI7bvWG0AErDGhWhiTpK.qkZu",
+    "firstName": "Test",
+    "lastName": "User",
+    "preferences": {
+      "defaultStore": "Any",
+      "currency": "BRL"
+    },
+    "createdAt": "2025-09-29T20:17:08.531Z",
+    "updatedAt": "2025-09-29T20:17:08.531Z"
+  },
+  {
+    "id": "8465c226-01fa-442b-9a9c-4962fcedda7c",
+    "email": "testuser1759177843817@pucminas.br",
+    "username": "testuser1759177843817",
+    "password": "$2a$12$TVGxbk6Wj8TdWShCj03OvuKg2lJTcw.WTUSm.PUOvN6XCKplRFoqS",
+    "firstName": "Test",
+    "lastName": "User",
+    "preferences": {
+      "defaultStore": "Any",
+      "currency": "BRL"
+    },
+    "createdAt": "2025-09-29T20:30:44.195Z",
+    "updatedAt": "2025-09-29T20:30:44.195Z"
   }
 ]

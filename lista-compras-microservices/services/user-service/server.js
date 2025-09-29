@@ -95,27 +95,36 @@ class UserService {
         }
     }
 
-    async login(req, res) {
-        try {
-            const { identifier, password } = req.body; // Aceita email ou username
-            const user = await this.usersDb.findOne({ $or: [{ email: identifier }, { username: identifier }] });
-
-            if (!user || !await bcrypt.compare(password, user.password)) {
-                return res.status(401).json({ success: false, message: 'Credenciais inválidas' });
-            }
-
-            const token = jwt.sign(
-                { id: user.id, email: user.email, username: user.username },
-                'sua-chave-secreta-jwt',
-                { expiresIn: '24h' }
-            );
-
-            const { password: _, ...userWithoutPassword } = user;
-            res.json({ success: true, data: { user: userWithoutPassword, token } });
-        } catch (error) {
-            res.status(500).json({ success: false, message: 'Erro interno do servidor' });
+    // VERSÃO NOVA E CORRIGIDA
+async login(req, res) {
+    try {
+        const { identifier, password } = req.body;
+        if (!identifier || !password) {
+            return res.status(400).json({ success: false, message: 'Identificador e senha são obrigatórios' });
         }
+
+        // Busca primeiro por email, depois por username
+        let user = await this.usersDb.findOne({ email: identifier });
+        if (!user) {
+            user = await this.usersDb.findOne({ username: identifier });
+        }
+
+        if (!user || !await bcrypt.compare(password, user.password)) {
+            return res.status(401).json({ success: false, message: 'Credenciais inválidas' });
+        }
+
+        const token = jwt.sign(
+            { id: user.id, email: user.email, username: user.username },
+            'sua-chave-secreta-jwt',
+            { expiresIn: '24h' }
+        );
+
+        const { password: _, ...userWithoutPassword } = user;
+        res.json({ success: true, data: { user: userWithoutPassword, token } });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Erro interno do servidor' });
     }
+}
     
     async validateToken(req, res) {
         try {
