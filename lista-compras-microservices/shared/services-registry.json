@@ -2,21 +2,21 @@
   "item-service": {
     "url": "http://127.0.0.1:3003",
     "registeredAt": 1759176859199,
-    "lastHealthCheck": 1759177892228,
+    "lastHealthCheck": 1759178072336,
     "healthy": true,
     "pid": 52123
   },
   "user-service": {
     "url": "http://127.0.0.1:3001",
     "registeredAt": 1759177011868,
-    "lastHealthCheck": 1759177892232,
+    "lastHealthCheck": 1759178072339,
     "healthy": true,
     "pid": 54633
   },
   "list-service": {
     "url": "http://127.0.0.1:3002",
     "registeredAt": 1759177803871,
-    "lastHealthCheck": 1759177893873,
+    "lastHealthCheck": 1759178073879,
     "healthy": true,
     "pid": 65310
   }
