@@ -1,3 +1,7 @@
+const fs = require('fs-extra');
+const path = require('path'); // <--- ADICIONE ESTA LINHA
+const { v4: uuidv4 } = require('uuid');
+
 class JsonDatabase {
     constructor(dbPath, collectionName) {
         this.dbPath = dbPath;

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "beda6465-394d-4644-af38-f1a72039b300",
+    "email": "testuser1759176877346@pucminas.br",
+    "username": "testuser1759176877346",
+    "password": "$2a$12$ndJVLZf/18oml9svq9YLxOlZKEcgbc4irEC98r/Yp2HLOkAWxAo5a",
+    "firstName": "Test",
+    "lastName": "User",
+    "preferences": {
+      "defaultStore": "Any",
+      "currency": "BRL"
+    },
+    "createdAt": "2025-09-29T20:14:37.765Z",
+    "updatedAt": "2025-09-29T20:14:37.765Z"
+  }
+]
