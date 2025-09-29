@@ -1,0 +1,37 @@
+{
+  "name": "lista-compras-microservices",
+  "version": "1.0.0",
+  "description": "Sistema de Lista de Compras com Microsserviços - Atividade Prática",
+  "main": "client-demo.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:user\" \"npm run start:item\" \"npm run start:list\" \"npm run start:gateway\"",
+    "start:user": "cd services/user-service && npm start",
+    "start:item": "cd services/item-service && npm start",
+    "start:list": "cd services/list-service && npm start",
+    "start:gateway": "cd api-gateway && npm start",
+    "dev": "concurrently \"npm run dev:user\" \"npm run dev:item\" \"npm run dev:list\" \"npm run dev:gateway\"",
+    "dev:user": "cd services/user-service && npm run dev",
+    "dev:item": "cd services/item-service && npm run dev",
+    "dev:list": "cd services/list-service && npm run dev",
+    "dev:gateway": "cd api-gateway && npm run dev",
+    "demo": "node client-demo.js",
+    "health": "curl -s http://localhost:3000/health",
+    "install:all": "npm install && cd services/user-service && npm install && cd ../item-service && npm install && cd ../list-service && npm install && cd ../../api-gateway && npm install",
+    "clean": "rm -rf node_modules services/*/node_modules api-gateway/node_modules",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "microservices",
+    "nosql",
+    "api-gateway",
+    "shopping-list"
+  ],
+  "author": "Aluno PUC Minas",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
