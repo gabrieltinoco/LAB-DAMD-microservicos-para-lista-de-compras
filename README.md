@@ -6,21 +6,21 @@ Este projeto demonstra a construção de uma aplicação back-end seguindo os pr
 
 ## ✨ Funcionalidades
 
-Gerenciamento de Usuários: Cadastro e autenticação com Tokens JWT.
+* Gerenciamento de Usuários: Cadastro e autenticação com Tokens JWT.
 
-Catálogo de Itens: CRUD para itens que podem ser adicionados às listas.
+* Catálogo de Itens: CRUD para itens que podem ser adicionados às listas.
 
-Gerenciamento de Listas: CRUD completo para listas de compras por usuário.
+* Gerenciamento de Listas: CRUD completo para listas de compras por usuário.
 
-Comunicação entre Serviços: O serviço de listas consome dados do serviço de itens.
+* Comunicação entre Serviços: O serviço de listas consome dados do serviço de itens.
 
-Ponto de Entrada Único: Todas as requisições são gerenciadas por um API Gateway.
+* Ponto de Entrada Único: Todas as requisições são gerenciadas por um API Gateway.
 
-Descoberta de Serviços: Os serviços se registram e se descobrem dinamicamente.
+* Descoberta de Serviços: Os serviços se registram e se descobrem dinamicamente.
 
-Padrões de Resiliência: Implementação de Health Checks e um Circuit Breaker simples.
+* Padrões de Resiliência: Implementação de Health Checks e um Circuit Breaker simples.
 
-Persistência de Dados: Padrão "Database per Service" utilizando bancos de dados NoSQL baseados em arquivos JSON.
+* Persistência de Dados: Padrão "Database per Service" utilizando bancos de dados NoSQL baseados em arquivos JSON.
 
 ## 🏗️ Arquitetura
 O sistema é composto por 4 serviços principais que se comunicam via REST. O API Gateway serve como um proxy reverso, roteando as requisições do cliente para o serviço apropriado. O Service Registry (baseado em arquivo) permite que os serviços encontrem uns aos outros na rede.
@@ -56,21 +56,21 @@ graph TD
 
 ## 🛠️ Tecnologias Utilizadas
 
-Node.js: Ambiente de execução JavaScript.
+* Node.js: Ambiente de execução JavaScript.
 
-Express.js: Framework para construção das APIs.
+* Express.js: Framework para construção das APIs.
 
-Axios: Cliente HTTP para comunicação entre serviços.
+* Axios: Cliente HTTP para comunicação entre serviços.
 
-JSON Web Token (JWT): Para autenticação e autorização.
+* JSON Web Token (JWT): Para autenticação e autorização.
 
-bcrypt.js: Para hashing de senhas.
+* bcrypt.js: Para hashing de senhas.
 
-fs-extra: Para manipulação do banco de dados baseado em arquivos JSON.
+* fs-extra: Para manipulação do banco de dados baseado em arquivos JSON.
 
-Concurrently: Para executar múltiplos serviços simultaneamente.
+* Concurrently: Para executar múltiplos serviços simultaneamente.
 
-Nodemon: Para reiniciar os serviços automaticamente durante o desenvolvimento.
+* Nodemon: Para reiniciar os serviços automaticamente durante o desenvolvimento.
 
 ## 📂 Estrutura do Projeto
 
@@ -92,20 +92,22 @@ lista-compras-microservices/
 
 ## 🚀 Como Executar
 
-Pré-requisitos
-Node.js (v16 ou superior)
+### Pré-requisitos
 
-npm (v8 ou superior)
+* Node.js (v16 ou superior)
 
-1. Instalação
+* npm (v8 ou superior)
+
+### 1. Instalação
 Clone este repositório e instale todas as dependências a partir do diretório raiz. O projeto utiliza um node_modules centralizado na raiz para evitar problemas de resolução de módulos em ambientes virtualizados.
 
 ```
-git clone 
+git clone https://github.com/gabrieltinoco/LAB-DAMD-microservicos-para-lista-de-compras.git
 cd lista-compras-microservices
 npm install
 ```
-2. Execução
+
+### 2. Execução
 Para executar o ambiente completo, você precisará de 4 terminais para os serviços/gateway e um quinto terminal para rodar o cliente de demonstração.
 
 Opção A: Manual (Recomendado para Debug)
@@ -146,7 +148,7 @@ No diretório raiz, execute:
 npm start
 ```
 
-3. Teste com o Cliente de Demonstração
+### 3. Teste com o Cliente de Demonstração
 Com todos os serviços rodando, abra um quinto terminal na raiz do projeto e execute o script de demonstração:
 
 ```
@@ -155,7 +157,7 @@ npm run demo
 
 O script irá registrar um novo usuário, fazer login, criar uma lista, adicionar itens e exibir um dashboard.
 
-⚙️ Endpoints da API
+### ⚙️ Endpoints da API
 Todas as requisições devem ser feitas para o API Gateway (http://localhost:3000).
 
 | Método | Endpoint               | Serviço Destino | Descrição                                      | Autenticação |
@@ -171,8 +173,9 @@ Todas as requisições devem ser feitas para o API Gateway (http://localhost:300
 | GET    | /health                | Gateway         | Verifica a saúde de todos os serviços.         | Não          |
 | GET    | /registry              | Gateway         | Exibe os serviços registrados.                 | Não          |
 
-Exportar para as Planilhas
-🤔 Troubleshooting
+
+### 🤔 Troubleshooting
+
 Erro: `Serviço ... indisponível` 
 
 Verifique se todos os 4 serviços estão rodando em seus respectivos terminais.
