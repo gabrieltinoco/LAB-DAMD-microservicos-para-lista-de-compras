@@ -1,6 +1,10 @@
 # Sistema de Lista de Compras com Microsserviços
 Projeto prático da disciplina de Laboratório de Desenvolvimento de Aplicações Móveis e Distribuídas, que implementa um sistema distribuído para gerenciamento de listas de compras utilizando arquitetura de microsserviços.
 
+## 📹 Vídeo de Apresentação
+
+[Link do vídeo de apresentação do sistema no Youtube](https://youtu.be/l996NW-6cww)
+
 ## 📖 Descrição
 Este projeto demonstra a construção de uma aplicação back-end seguindo os princípios da arquitetura de microsserviços. O sistema é composto por serviços independentes, cada um com sua própria responsabilidade e banco de dados, que se comunicam através de um API Gateway central. A aplicação permite que usuários se cadastrem, criem listas de compras e adicionem itens de um catálogo predefinido a elas.
 
